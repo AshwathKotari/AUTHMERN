@@ -1,8 +1,9 @@
 import React from 'react'
 import { useNavigate,NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 export const SignUp = () => {
-
+ const [formData,setFormData]=useState({})
  
 
   const handleChange = (e) => {
@@ -12,11 +13,24 @@ export const SignUp = () => {
     });
   };
 
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    const res = await fetch('/api/auth/signup',{
+      method: 'POST',
+      headers:{
+        'content-type':'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    const data =await res.json();
+    console.log(data);{message:'user created successfully'}
+  }
+    
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
-      <form  className='flex flex-col gap-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
           type='text'
           placeholder='username'
