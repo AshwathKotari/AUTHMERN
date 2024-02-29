@@ -1,9 +1,12 @@
 import React from 'react'
-import { useNavigate,NavLink } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 import { useState } from 'react';
 
 export const SignUp = () => {
- const [formData,setFormData]=useState({})
+ const [formData,setFormData]=useState({});
+ const navigate = useNavigate();
  
 
   const handleChange = (e) => {
@@ -15,16 +18,21 @@ export const SignUp = () => {
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
-    const res = await fetch('/api/auth/signup',{
+    const res = await fetch('/api/auth/signUp',{
       method: 'POST',
       headers:{
         'content-type':'application/json',
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
+     
     });
-    const data =await res.json();
+    navigate('/SignIn')
+   
+    const data = await res.json();
+
     console.log(data);{message:'user created successfully'}
-  }
+    
+  };
     
 
   return (
