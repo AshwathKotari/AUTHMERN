@@ -12,7 +12,7 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname,'/cilent/dist')))
 
 app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'client/dist/index.html'))
+    res.sendFile(path.join(__dirname,'client','dist','index.html'))
 });
 
 import userRoutes from  './routes/user.route.js';
